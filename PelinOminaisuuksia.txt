@@ -1,0 +1,36 @@
+Pelaajalle kaksi ohjainprofiilia:
+1  - globaalit axit (on)
+2 - paikalliset axit (oli)
+
+
+
+2 asetta
+perus rynkky
+ kranunheitin, ase kääntyy ylös/alas ampumisetäisyyden(hiiren kursorin) mukaan
+
+
+
+Crimsonland
+1-2
+- Alkuvalikko
+- Hahmo liikkuu
+- Hahmo kääntyy hiiren suuntaan
+- Ampuu hiiren suuntaan
+- Toimiva pelattava peli
+- Viholliset kulkee pelikentällä
+- Pelissä on jonkinlainen UI
+3-4
+- Viholliset pyrkivät pelaajaa kohti
+- Erilasia aseita
+- Erilaisia vihollisia (kesto tms.)
+- Useampi taso (ei montaa)
+- Pelin pausettaminen ja pelinaikainen valikko.
+- Pelissä on alku ja loppu. Peli on päästävissä ”läpi”.
+- Peliin ilmestyy jonkinlaisia boosteja ajoittain, joita pelaaja voi kerätä. 
+5
+- Pelin pelattavuus on hyvä ja peliä on kiva pelata.
+- Musiikit ja efektit
+- XP systeemi ja kun pelaaja pääsee tason saa hän jonkun lisäominaisuuden 
+- Pelissä Save/Load toiminto yksinpelissä
+- Moninpeli (Photon)
+
