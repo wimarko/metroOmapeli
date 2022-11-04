@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] float rotateSpeed;
+
+    [SerializeField] GameObject equippedWeapon = null;  //käytössä oleva ase
+    [SerializeField] Transform holdingTransform = null; //kohta mistä pidetään asetta kiinni
+
     //stringint nopeuttamaan, ehkä turhaan
     private string horizontal = "Horizontal";
     private string vertical = "Vertical";
@@ -21,7 +26,10 @@ public class PlayerController : MonoBehaviour
     {
         controller = gameObject.AddComponent<CharacterController>();
         mainCamera = FindObjectOfType<Camera>();
+        SpawnWeapon();
     }
+
+    
 
     void Update()
     {
@@ -58,7 +66,13 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("SHOOT");
         GameObject ammoInstance = Instantiate(ammo, ammoSpawn.transform.position, Quaternion.identity);
+        
         ammoInstance.GetComponent<Rigidbody>().AddForce(ammoSpawn.transform.forward * 400);
         Destroy(ammoInstance, 3);
+    }
+
+    private void SpawnWeapon()
+    {
+        Instantiate(equippedWeapon, holdingTransform);
     }
 }
