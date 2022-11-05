@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float rotateSpeed;
 
-    [SerializeField] GameObject equippedWeapon = null;  //käytössä oleva ase
+    [SerializeField] Weapon defaultWeapon = null;  //käytössä oleva ase
     [SerializeField] Transform holdingTransform = null; //kohta mistä pidetään asetta kiinni
 
     //stringint nopeuttamaan, ehkä turhaan
@@ -22,11 +22,13 @@ public class PlayerController : MonoBehaviour
     public GameObject ammoSpawn;
     Camera mainCamera;
 
+    Weapon currentWeapon = null;
+
     private void Start()
     {
         controller = gameObject.AddComponent<CharacterController>();
         mainCamera = FindObjectOfType<Camera>();
-        SpawnWeapon();
+        EquipWeapon(defaultWeapon);
     }
 
     
@@ -71,8 +73,26 @@ public class PlayerController : MonoBehaviour
         Destroy(ammoInstance, 3);
     }
 
+    public void EquipWeapon(Weapon newWeapon)
+    {
+        if(newWeapon == null)
+        {
+            Debug.Log("Ei ole asetta");
+            return;
+        }
+        currentWeapon = newWeapon;
+        Debug.Log("on ase");
+       newWeapon.Spawn(holdingTransform);
+        //Instantiate(equippedWeapon, holdingTransform);
+    }
+
+    /*
+     * vanha, ei scripted objektia
     private void SpawnWeapon()
     {
         Instantiate(equippedWeapon, holdingTransform);
     }
+    */
+
+
 }
