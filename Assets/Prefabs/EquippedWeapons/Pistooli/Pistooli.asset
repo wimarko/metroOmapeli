@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83d4053ad5b42cc4da0173c5542b9161, type: 3}
-  m_Name: Roku
+  m_Name: Pistooli
   m_EditorClassIdentifier: 
-  equippedWeaponPrefab: {fileID: 648230719558760792, guid: e416f76dc705c854a861944e1fc0a29a,
+  equippedWeaponPrefab: {fileID: 1536610277447191348, guid: 3c166e815db780b4eaa9f6487e0978c7,
     type: 3}
-  weaponDamage: 50
+  weaponDamage: 5

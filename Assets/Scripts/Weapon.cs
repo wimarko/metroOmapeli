@@ -7,14 +7,19 @@ public class Weapon : ScriptableObject
     [SerializeField] GameObject equippedWeaponPrefab = null;
     [SerializeField] float weaponDamage = 5f;
 
+
+    const string weaponName = "Weapon";
     public void Spawn(Transform holdingpos)
        
         //public void SpawnWeapon(Transform handTransform, Animator animator) //kun on animaatiot.. eri aseille omat
     {
+        DestroyOldWeapon(holdingpos);
+
         Debug.Log("Spawnataan asetta");
         if(equippedWeaponPrefab != null)
         {
-            Instantiate(equippedWeaponPrefab, holdingpos);
+            GameObject weapon = Instantiate(equippedWeaponPrefab, holdingpos);
+            weapon.name = weaponName;
         }
         
 
@@ -23,5 +28,18 @@ public class Weapon : ScriptableObject
     public float GetDamage()
     {
         return weaponDamage; 
+    }
+
+    private void DestroyOldWeapon(Transform weaponpos)
+    {
+        Transform oldWeapon = weaponpos.Find(weaponName);
+        if(oldWeapon == null)
+        {
+            return;
+        }
+
+        oldWeapon.name = "DESTROO";  //jotain toimivuuden kannalta
+        Destroy(oldWeapon.gameObject);
+
     }
 }
