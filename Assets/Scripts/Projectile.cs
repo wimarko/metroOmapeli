@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     //[SerializeField] GameObject model = null;
     // Start is called before the first frame update
     [SerializeField]float  lifeTime = 3;
+    [SerializeField] float projectileDamage = 10;
     void Start()
     {
         
@@ -20,5 +21,15 @@ public class Projectile : MonoBehaviour
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         Destroy(gameObject, lifeTime);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Osuttiin vihuun");
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(projectileDamage);
+            Destroy(gameObject);
+        }
     }
 }

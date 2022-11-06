@@ -5,12 +5,16 @@ public class Weapon : ScriptableObject
 {
     //[SerializeField] AnimatorOverrideController weaponAnimatorOverride = null; //kun on omat animaatiot
     [SerializeField] GameObject equippedWeaponPrefab = null;
-    [SerializeField] float weaponDamage = 5f;
+    //[SerializeField] float weaponDamage = 5f;
     [SerializeField] Projectile projectile = null;
+    [SerializeField] float fireDelay = 1f;
+    private float timeToReady;
+
     public GameObject launchpos = null;
  
 
     const string weaponName = "Weapon";
+
     public void Spawn(Transform holdingpos)
        
         //public void SpawnWeapon(Transform handTransform, Animator animator) //kun on animaatiot.. eri aseille omat
@@ -27,13 +31,17 @@ public class Weapon : ScriptableObject
 
         //animator.runtimeController = weaponAnimatorOverride; //jos/kun aseille on omat hyokkianimaatiot
     }
-    public float GetDamage()
-    {
-        return weaponDamage; 
-    }
+
+
+        
+
+    
+
 
     private void DestroyOldWeapon(Transform weaponpos)
     {
+        
+
         Transform oldWeapon = weaponpos.Find(weaponName);
         if(oldWeapon == null)
         {
@@ -47,9 +55,12 @@ public class Weapon : ScriptableObject
 
     public void LaunchProjectile (Transform pos)
     {
-        //Projectile projectileInstance = Instantiate(projectile, launchpos.transform);
-        Projectile ammoInstance = Instantiate(projectile, pos.position,pos.rotation);
-        
+        timeToReady = timeToReady - Time.deltaTime;
+        if (timeToReady <= 0)
+        {
+            Projectile ammoInstance = Instantiate(projectile, pos.position, pos.rotation);
+            timeToReady = fireDelay;
+        }   
         
     }
 }

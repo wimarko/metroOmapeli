@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 1114436088246105978}
   - component: {fileID: 4344799835785393778}
   - component: {fileID: 6639705973630639929}
+  - component: {fileID: 7324116022499899802}
   m_Layer: 0
   m_Name: Projectile_Bullet
   m_TagString: Untagged
@@ -163,6 +164,19 @@ MonoBehaviour:
   speed: 50
   model: {fileID: 0}
   lifeTime: 3
+--- !u!65 &7324116022499899802
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790322741255133058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.14044493, y: 0.12143984, z: 0.3986728}
+  m_Center: {x: 0.0038546324, y: 0.001141604, z: 0.013697371}
 --- !u!1 &7857374651127794818
 GameObject:
   m_ObjectHideFlags: 0
