@@ -6,7 +6,9 @@ public class Weapon : ScriptableObject
     //[SerializeField] AnimatorOverrideController weaponAnimatorOverride = null; //kun on omat animaatiot
     [SerializeField] GameObject equippedWeaponPrefab = null;
     [SerializeField] float weaponDamage = 5f;
-
+    [SerializeField] Projectile projectile = null;
+    public GameObject launchpos = null;
+ 
 
     const string weaponName = "Weapon";
     public void Spawn(Transform holdingpos)
@@ -41,5 +43,13 @@ public class Weapon : ScriptableObject
         oldWeapon.name = "DESTROO";  //jotain toimivuuden kannalta
         Destroy(oldWeapon.gameObject);
 
+    }
+
+    public void LaunchProjectile (Transform pos)
+    {
+        //Projectile projectileInstance = Instantiate(projectile, launchpos.transform);
+        Projectile ammoInstance = Instantiate(projectile, pos.position,pos.rotation);
+        
+        
     }
 }

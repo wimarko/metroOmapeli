@@ -67,10 +67,13 @@ public class PlayerController : MonoBehaviour
     public void Shoot()
     {
         Debug.Log("SHOOT");
+        /*
         GameObject ammoInstance = Instantiate(ammo, ammoSpawn.transform.position, Quaternion.identity);
         
         ammoInstance.GetComponent<Rigidbody>().AddForce(ammoSpawn.transform.forward * 400);
         Destroy(ammoInstance, 3);
+        */
+        currentWeapon.LaunchProjectile(ammoSpawn.transform);
     }
 
     public void EquipWeapon(Weapon newWeapon)
@@ -86,13 +89,7 @@ public class PlayerController : MonoBehaviour
         //Instantiate(equippedWeapon, holdingTransform);
     }
 
-    /*
-     * vanha, ei scripted objektia
-    private void SpawnWeapon()
-    {
-        Instantiate(equippedWeapon, holdingTransform);
-    }
-    */
+
 
 
 }
