@@ -24,8 +24,8 @@ public class PatrolPath : MonoBehaviour
         }
   
     }
-
-    private int GetNextIndex(int i)
+    //public, että päästään StatePatternEnemystä käsiksi
+    public int GetNextIndex(int i)
     {
         if ( i +1 >= transform.childCount) //Looppaa ympäri
         {
@@ -34,8 +34,7 @@ public class PatrolPath : MonoBehaviour
 
         return i + 1;
     }
-
-    private Vector3 GetWaypoint(int i)
+  public Vector3 GetWaypoint(int i)
     {
         return transform.GetChild(i).position;
     }
