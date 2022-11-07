@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="Weapon", menuName = "Weapons/New Weapon", order = 0)]
-public class Weapon : ScriptableObject
+public class Weapon : ScriptableObject, IWeapon
 {
     //[SerializeField] AnimatorOverrideController weaponAnimatorOverride = null; //kun on omat animaatiot
     [SerializeField] GameObject equippedWeaponPrefab = null;
@@ -24,7 +24,9 @@ public class Weapon : ScriptableObject
         Debug.Log("Spawnataan asetta");
         if(equippedWeaponPrefab != null)
         {
+
             GameObject weapon = Instantiate(equippedWeaponPrefab, holdingpos);
+            FindObjectOfType<PlayerController>().SetRateOfFire(fireDelay);
             weapon.name = weaponName;
         }
         
@@ -32,10 +34,6 @@ public class Weapon : ScriptableObject
         //animator.runtimeController = weaponAnimatorOverride; //jos/kun aseille on omat hyokkianimaatiot
     }
 
-
-        
-
-    
 
 
     private void DestroyOldWeapon(Transform weaponpos)
@@ -55,12 +53,7 @@ public class Weapon : ScriptableObject
 
     public void LaunchProjectile (Transform pos)
     {
-        timeToReady = timeToReady - Time.deltaTime;
-        if (timeToReady <= 0)
-        {
             Projectile ammoInstance = Instantiate(projectile, pos.position, pos.rotation);
-            timeToReady = fireDelay;
-        }   
-        
+   
     }
 }

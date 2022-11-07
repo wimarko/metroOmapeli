@@ -16,5 +16,5 @@ MonoBehaviour:
     type: 3}
   projectile: {fileID: 6639705973630639929, guid: 97d959c0b61342d4294fd4719f876de8,
     type: 3}
-  fireDelay: 2
+  fireDelay: 1.5
   launchpos: {fileID: 0}

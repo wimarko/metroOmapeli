@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equippedWeaponPrefab: {fileID: 1536610277447191348, guid: 3c166e815db780b4eaa9f6487e0978c7,
     type: 3}
-  weaponDamage: 5
+  projectile: {fileID: 6639705973630639929, guid: 3598e5957548b2740a107b1522e2bdab,
+    type: 3}
+  fireDelay: 1
+  launchpos: {fileID: 0}

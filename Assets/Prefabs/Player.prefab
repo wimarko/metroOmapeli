@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 8196665177438025389}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,9 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0262d610d97e50c41963c3ce2b7fc06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 4
   rotateSpeed: 4
-  weapon: {fileID: 0}
-  handTransform: {fileID: 3407473739197047058}
-  ammo: {fileID: 7032038278497051844, guid: 00ec5c065eebcf240a7a533e7d083820, type: 3}
+  defaultWeapon: {fileID: 11400000, guid: 33f25e56adee8ee4ba0dd2dc38544b0d, type: 2}
+  holdingTransform: {fileID: 3407473739197047058}
+  rateOfFire: 1
+  ammo: {fileID: 0}
   ammoSpawn: {fileID: 2637828975494022142}

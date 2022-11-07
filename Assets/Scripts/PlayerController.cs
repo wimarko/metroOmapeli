@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
     //stringint nopeuttamaan, ehkä turhaan
     private string horizontal = "Horizontal";
     private string vertical = "Vertical";
-
+    [SerializeField] float rateOfFire = 1;
+    private float firePause;
     public GameObject ammo;
     public GameObject ammoSpawn;
     Camera mainCamera;
@@ -35,6 +36,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(firePause >0)
+        {
+            firePause -= Time.deltaTime;
+        }
+
         Move();
 
         if(Input.GetButton("Fire1"))
@@ -67,13 +73,12 @@ public class PlayerController : MonoBehaviour
     public void Shoot()
     {
         Debug.Log("SHOOT");
-        /*
-        GameObject ammoInstance = Instantiate(ammo, ammoSpawn.transform.position, Quaternion.identity);
+        if(firePause <= 0)
+        {
+            currentWeapon.LaunchProjectile(ammoSpawn.transform);
+            firePause = rateOfFire;
+        }
         
-        ammoInstance.GetComponent<Rigidbody>().AddForce(ammoSpawn.transform.forward * 400);
-        Destroy(ammoInstance, 3);
-        */
-        currentWeapon.LaunchProjectile(ammoSpawn.transform);
     }
 
     public void EquipWeapon(Weapon newWeapon)
@@ -89,7 +94,9 @@ public class PlayerController : MonoBehaviour
         //Instantiate(equippedWeapon, holdingTransform);
     }
 
-
-
+    public void SetRateOfFire(float rof)
+    {
+        rateOfFire = rof;
+    }
 
 }
