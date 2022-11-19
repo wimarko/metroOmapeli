@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] float rotateSpeed;
+    [SerializeField] int startingHealth = 200;
+    private float currentHealth;
+    [SerializeField] int armorValue = 0;
+    public float damageMultiplier = 1;
 
     [SerializeField] Weapon defaultWeapon = null;  //käytössä oleva ase
     [SerializeField] Transform holdingTransform = null; //kohta mistä pidetään asetta kiinni
@@ -30,6 +34,7 @@ public class PlayerController : MonoBehaviour
         controller = gameObject.AddComponent<CharacterController>();
         mainCamera = FindObjectOfType<Camera>();
         EquipWeapon(defaultWeapon);
+        currentHealth = startingHealth;
     }
 
     
@@ -97,6 +102,21 @@ public class PlayerController : MonoBehaviour
     public void SetRateOfFire(float rof)
     {
         rateOfFire = rof;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        float finalDamage = damage - (armorValue * damage);
+        currentHealth =- finalDamage;
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Debug.Log("Pelaaja kuoli");
     }
 
 }

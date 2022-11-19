@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour, IDamaegable
 
     [SerializeField] float health = 10;
     //[SerializeField] PatrolPath patrolPath = null;
+    [SerializeField] float damage = 5;
+    [SerializeField] int pointsValue = 5;
 
 
 
