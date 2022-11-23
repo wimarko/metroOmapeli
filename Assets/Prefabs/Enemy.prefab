@@ -114,6 +114,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  damage: 5
+  pointsValue: 5
+  attackSpeed: 1
+  attackRange: 5
 --- !u!114 &5360549866488727429
 MonoBehaviour:
   m_ObjectHideFlags: 0

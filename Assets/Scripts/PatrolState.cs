@@ -85,11 +85,8 @@ public class PatrolState : IEnemyState
         //vaihdetaan waypoint, kun p‰‰st‰‰n kohdewaypointiin
         if(enemyState.navMeshAgent.remainingDistance <= enemyState.navMeshAgent.stoppingDistance 
             && !enemyState.navMeshAgent.pathPending)  //eli liikkumisprosessi on p‰‰ttynyt (ei ole en‰‰ pathPending)
-        {
-                
-
+        {                
              CycleWaypoint();
-
         }
     }
 
@@ -101,7 +98,7 @@ public class PatrolState : IEnemyState
 
     private Vector3 GetCurrentWaypoint()
     {
-        return enemyState.patrolPath.GetWaypoint(currentWaypointIndex);
+            return enemyState.patrolPath.GetWaypoint(currentWaypointIndex);        
     }
 
     

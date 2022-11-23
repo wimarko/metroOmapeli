@@ -37,7 +37,7 @@ public class StatePatternEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentState = patrolState;
+            currentState = patrolState;
     }
 
     // Update is called once per frame

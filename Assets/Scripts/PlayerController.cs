@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerController : MonoBehaviour
@@ -11,12 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float rotateSpeed;
     [SerializeField] int startingHealth = 200;
-    private float currentHealth;
+    public float currentHealth;
     [SerializeField] int armorValue = 0;
     public float damageMultiplier = 1;
 
     [SerializeField] Weapon defaultWeapon = null;  //käytössä oleva ase
     [SerializeField] Transform holdingTransform = null; //kohta mistä pidetään asetta kiinni
+
+    public Image heatlhFilled;
 
     //stringint nopeuttamaan, ehkä turhaan
     private string horizontal = "Horizontal";
@@ -77,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log("SHOOT");
+        //Debug.Log("SHOOT");
         if(firePause <= 0)
         {
             currentWeapon.LaunchProjectile(ammoSpawn.transform);
@@ -90,11 +93,11 @@ public class PlayerController : MonoBehaviour
     {
         if(newWeapon == null)
         {
-            Debug.Log("Ei ole asetta");
+            //Debug.Log("Ei ole asetta");
             return;
         }
         currentWeapon = newWeapon;
-        Debug.Log("on ase");
+        //Debug.Log("on ase");
        newWeapon.Spawn(holdingTransform);
         //Instantiate(equippedWeapon, holdingTransform);
     }
@@ -104,10 +107,12 @@ public class PlayerController : MonoBehaviour
         rateOfFire = rof;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
+        Debug.Log("pelaaja vahingoittui");
         float finalDamage = damage - (armorValue * damage);
-        currentHealth =- finalDamage;
+        currentHealth -= finalDamage;
+        heatlhFilled.fillAmount = currentHealth / startingHealth;
         if(currentHealth <= 0)
         {
             Die();
@@ -117,6 +122,16 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         Debug.Log("Pelaaja kuoli");
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("pelaaja osui johonkin");
+        if (collision.gameObject.CompareTag("Ansa"))
+        {
+            Debug.Log("Osuttiin ansaan");
+            TakeDamage(10);
+        }
     }
 
 }
