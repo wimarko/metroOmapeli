@@ -23,7 +23,7 @@ public class SceneSettings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager.manager.Load(GameManager.manager.savename);
     }
 
     // Update is called once per frame
@@ -59,6 +59,7 @@ public class SceneSettings : MonoBehaviour
         enemies--;
         if(enemies <= 0)
         {
+            GameManager.manager.Save();
             SceneManager.LoadScene(nextLevel);
         }
     }

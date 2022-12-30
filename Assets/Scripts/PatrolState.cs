@@ -73,6 +73,7 @@ public class PatrolState : IEnemyState
            // enemy.indicator.material.color = Color.yellow; //omaa testiä
             ToChaseState();
         }
+
     }
 
     void Patrol()
