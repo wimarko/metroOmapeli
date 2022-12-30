@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEditor.PlayerSettings;
 
 public class SceneSettings : MonoBehaviour
@@ -12,12 +13,17 @@ public class SceneSettings : MonoBehaviour
     [SerializeField] GameObject[] dropObjects;
     [SerializeField] float droptimer = 20f;
     [SerializeField] float lifetime = 2f;
+    [SerializeField] GameObject[] enemySpawn;
+    [SerializeField] float enemySpawnTime;
+    [SerializeField] int enemies = 10;
+    float enemytimer;
     float counter;
+    [SerializeField] string nextLevel;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.manager.enemyCount = enemiesLeft;
+        
     }
 
     // Update is called once per frame
@@ -46,5 +52,14 @@ public class SceneSettings : MonoBehaviour
         GameObject droppedObject = Instantiate(dropObjects[num], dropPoints[dropIndex].transform.position, dropPoints[dropIndex].transform.rotation);
 
         Destroy(droppedObject, lifetime);
+    }
+
+    public void EnemyEliminated()
+    {
+        enemies--;
+        if(enemies <= 0)
+        {
+            SceneManager.LoadScene(nextLevel);
+        }
     }
 }

@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public bool gamePaused = false;
     public int finishedLevel;
     public string savename = "";
-    public int enemyCount;
 
     //player data
     public float playerMaxHealth = 100;
@@ -120,6 +119,8 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(scenename);
     }
+
+
 }
 
 

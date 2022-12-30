@@ -56,13 +56,4 @@ public class StatePatternEnemy : MonoBehaviour
     {
         return waypoints;
     }
-
-
-    //Wapaaehtoinen l‰ksy
-    /*
-     Tee nelj‰s tila. Tilan nimi on Tracking State. Kun enemy on Chase-tilassa, eik‰ en‰‰ n‰e pelaajaa
-    Tallentaa se muistiin pelaajan viimeisimm‰n tiedetyn sijainnin.
-    T‰m‰n j‰lkeen enemy menee trackin-stateen ja liikkuu t‰h‰n sijaintiin
-    Perille p‰‰sty‰‰n menee Alert-stateen
-     */
 }

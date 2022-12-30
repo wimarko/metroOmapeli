@@ -16,12 +16,14 @@ public class Enemy : MonoBehaviour, IDamaegable
     
     [SerializeField] float attackRange = 1;
 
+    SceneSettings sceneSettings;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        sceneSettings = FindObjectOfType<SceneSettings>();
     }
 
     // Update is called once per frame
@@ -45,7 +47,8 @@ public class Enemy : MonoBehaviour, IDamaegable
     {
         //GameManager.manager.AddPoints(pointsValue);
         Destroy(gameObject);
-        GameManager.manager.enemyCount --;
+        sceneSettings.EnemyEliminated();
+        
     }
     
 
