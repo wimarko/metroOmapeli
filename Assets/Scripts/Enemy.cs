@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour, IDamaegable
     [SerializeField] float health = 10;
     //[SerializeField] PatrolPath patrolPath = null;
     [SerializeField] float damage = 5;
-    [SerializeField] int pointsValue = 5;
+    //[SerializeField] int pointsValue = 5;
     [SerializeField] float attackSpeed = 1f;
     
     [SerializeField] float attackRange = 1;
@@ -43,34 +43,12 @@ public class Enemy : MonoBehaviour, IDamaegable
 
     private void Die()
     {
+        //GameManager.manager.AddPoints(pointsValue);
         Destroy(gameObject);
+        GameManager.manager.enemyCount --;
     }
     
-    //Aiheutetaan damagea
-    //TODO muuta vain etäisyydeksi.. kuten corecombatcreatorissa?
-    //Tämä chasemodeen tai omaan modeensa.. kuten attack Range? 
-    //kuuluu mennä Updateen "jos rangessa ja voi hyökätä"
-    private void OnTriggerStay(Collider other)
-    {
-        /*
-        if(other.gameObject.tag == "Player")
-        {
-            if (timeSinceLastAttack > attackSpeed)
-            {
-                Debug.Log("vihu törmäsi pelaajaan");
-                other.GetComponentInChildren<PlayerController>().TakeDamage(damage);
-                timeSinceLastAttack = 0;
-            }
-            
-        }
-        else
-        {
-            Debug.Log("Törmättiin vaan");
-            Debug.Log("kohde: "+other.GetComponentInChildren<PlayerController>());
-            Debug.Log("sen Tagi " + other.gameObject.tag);
-        }
-        */
-    }
+
 
 
     private void causeDamage(GameObject target)

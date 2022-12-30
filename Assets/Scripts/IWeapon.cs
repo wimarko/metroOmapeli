@@ -6,6 +6,6 @@ public interface IWeapon
 {
 
 
-   public void LaunchProjectile(Transform pos);
+   public void LaunchProjectile(Transform pos, float damageMúltiplier);
 
 }

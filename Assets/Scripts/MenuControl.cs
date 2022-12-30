@@ -16,8 +16,8 @@ public class MenuControl : MonoBehaviour
         GameManager.manager.Save();
     }
 
-    public void Load ()
+    public void Load (string savename)
     {
-        GameManager.manager.Load();
+        GameManager.manager.Load(savename);
     }
 }

@@ -51,7 +51,7 @@ public class ChaseState : IEnemyState
 
     void Chase()
     {
-        Debug.Log("chasing");
+        //Debug.Log("chasing");
         enemyState.indicator.material.color = Color.black;
         //enemy.navMeshAgent.destination = enemy.chaseTarget.position;
         enemyState.navMeshAgent.destination = enemyState.lastSight;

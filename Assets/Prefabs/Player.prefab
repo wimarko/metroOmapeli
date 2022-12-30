@@ -157,7 +157,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 8196665177229482045}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -209,8 +209,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   rotateSpeed: 4
+  startingHealth: 200
+  currentHealth: 0
+  armorValue: 0
+  damageMultiplier: 1
   defaultWeapon: {fileID: 11400000, guid: 33f25e56adee8ee4ba0dd2dc38544b0d, type: 2}
   holdingTransform: {fileID: 3407473739197047058}
-  rateOfFire: 1
+  heatlhFilled: {fileID: 0}
+  rateOfFire: 0.5
   ammo: {fileID: 0}
   ammoSpawn: {fileID: 2637828975494022142}
+  mouseTarget: {fileID: 0}

@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]float  lifeTime = 3;
     [SerializeField] float projectileDamage = 10;
+    public float damageMultiplier = 1;
     void Start()
     {
         
@@ -28,7 +29,7 @@ public class Projectile : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("Osuttiin vihuun");
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(projectileDamage);
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(projectileDamage * damageMultiplier);
             Destroy(gameObject);
         }
     }

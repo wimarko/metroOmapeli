@@ -3,18 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+//using UnityEngine.UIElements;
+
 
 public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
 
-    [SerializeField] float moveSpeed;
+    float moveSpeed;
+    [SerializeField] float startingSpeed;
     [SerializeField] float rotateSpeed;
-    [SerializeField] int startingHealth = 200;
+    [SerializeField] float startingHealth = 200;
     public float currentHealth;
-    [SerializeField] int armorValue = 0;
+    [SerializeField] float armorValue = 0;
     public float damageMultiplier = 1;
+    public bool active = true;
+    public bool boosted = false;
+    public float boostTime = 0f;
 
     [SerializeField] Weapon defaultWeapon = null;  //käytössä oleva ase
     [SerializeField] Transform holdingTransform = null; //kohta mistä pidetään asetta kiinni
@@ -29,31 +34,52 @@ public class PlayerController : MonoBehaviour
     public GameObject ammo;
     public GameObject ammoSpawn;
     Camera mainCamera;
+    public float rofMultiplier = 1; //adjust speed of fire, bigger = faster
 
     Weapon currentWeapon = null;
+    [SerializeField] MouseTarget mouseTarget;
+
+    
 
     private void Start()
     {
+
+        startingHealth = GameManager.manager.playerMaxHealth;
         controller = gameObject.AddComponent<CharacterController>();
         mainCamera = FindObjectOfType<Camera>();
         EquipWeapon(defaultWeapon);
         currentHealth = startingHealth;
+        moveSpeed = startingSpeed;
+        
     }
 
     
 
     void Update()
     {
-        if(firePause >0)
+        if (active)
         {
-            firePause -= Time.deltaTime;
+            if (firePause > 0)
+            {
+                firePause -= Time.deltaTime;
+            }
+
+            Move();
+
+            if (Input.GetButton("Fire1"))
+            {
+                Shoot();
+            }
         }
-
-        Move();
-
-        if(Input.GetButton("Fire1"))
+        if(boosted)
         {
-            Shoot();
+            boostTime -= Time.deltaTime;
+            if (boostTime < 0)
+            {
+                moveSpeed = startingSpeed;
+                boosted = false;
+            }
+            
         }
         
     }
@@ -65,17 +91,7 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(xMovement, 0, yMovement, Space.World);
 
-        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayLength;
-
-        if (groundPlane.Raycast(cameraRay, out rayLength))
-        {
-            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            Debug.DrawLine(cameraRay.origin, pointToLook, Color.cyan, 1f);
-
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-        }
+        transform.LookAt(new Vector3(mouseTarget.transform.position.x, 0f, mouseTarget.transform.position.z));
     }
 
     public void Shoot()
@@ -83,8 +99,8 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("SHOOT");
         if(firePause <= 0)
         {
-            currentWeapon.LaunchProjectile(ammoSpawn.transform);
-            firePause = rateOfFire;
+            currentWeapon.LaunchProjectile(ammoSpawn.transform, damageMultiplier);
+            firePause = rateOfFire / rofMultiplier;
         }
         
     }
@@ -110,7 +126,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Debug.Log("pelaaja vahingoittui");
-        float finalDamage = damage - (armorValue * damage);
+        float finalDamage = damage;// armorValue;
         currentHealth -= finalDamage;
         heatlhFilled.fillAmount = currentHealth / startingHealth;
         if(currentHealth <= 0)
@@ -133,5 +149,61 @@ public class PlayerController : MonoBehaviour
             TakeDamage(10);
         }
     }
+
+    public void RepairArmor(int amount)
+    {
+        currentHealth += amount;
+        if(currentHealth > startingHealth)
+        {
+            currentHealth = startingHealth;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {  
+        string tag = other.tag;
+        switch(tag)
+        {
+            case "RepairPack":
+                if (currentHealth < startingHealth)
+                {
+                    //repairpack kertoo paljonko korjataan armouria(healthia)
+                    RepairArmor(other.GetComponentInParent<RepairPack>().GetRepairAmount());
+                    Destroy(other.gameObject);
+                    heatlhFilled.fillAmount = currentHealth / startingHealth;
+                }
+                break;
+
+            case "SpeedBoost":
+                if(!boosted)
+                {
+                    //Annetaan BoostSpeed-metodille parametreiksi boostin määrä ja aika, boosteriobjektista
+                    BoostSpeed(other.GetComponentInParent<SpeedBooster>().GetSpeedBoost()
+                        , other.GetComponentInParent<SpeedBooster>().GetBoostTime());
+                    Destroy(other.gameObject);
+                }   
+                break;
+        }
+
+    }
+
+    public void BoostSpeed(float amount, float time )
+    {
+        moveSpeed = amount * moveSpeed;
+        boostTime = time;
+        boosted = true;
+
+    }
+
+    public void SavePlayerData()
+    {
+        GameManager.manager.playerMaxHealth = startingHealth;
+        GameManager.manager.playerArmorValue = armorValue;
+        GameManager.manager.playerDamageMultiplier = damageMultiplier;
+        GameManager.manager.playerRofMultiplier = rofMultiplier;
+        GameManager.manager.playerWeapon = currentWeapon;
+    }
+
+
 
 }

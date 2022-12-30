@@ -51,7 +51,7 @@ public class Weapon : ScriptableObject, IWeapon
 
     }
 
-    public void LaunchProjectile (Transform pos)
+    public void LaunchProjectile (Transform pos, float damageMultiplier)
     {
             Projectile ammoInstance = Instantiate(projectile, pos.position, pos.rotation);
    
