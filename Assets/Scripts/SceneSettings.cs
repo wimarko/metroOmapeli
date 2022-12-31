@@ -24,6 +24,7 @@ public class SceneSettings : MonoBehaviour
     void Start()
     {
         GameManager.manager.Load(GameManager.manager.savename);
+        GameManager.manager.nextLevel = nextLevel;
     }
 
     // Update is called once per frame
@@ -49,7 +50,8 @@ public class SceneSettings : MonoBehaviour
 
         int dropIndex = Random.Range(0, dropPoints.Length);
 
-        GameObject droppedObject = Instantiate(dropObjects[num], dropPoints[dropIndex].transform.position, dropPoints[dropIndex].transform.rotation);
+        GameObject droppedObject =
+            Instantiate(dropObjects[num], dropPoints[dropIndex].transform.position, dropPoints[dropIndex].transform.rotation);
 
         Destroy(droppedObject, lifetime);
     }
@@ -60,7 +62,7 @@ public class SceneSettings : MonoBehaviour
         if(enemies <= 0)
         {
             GameManager.manager.Save();
-            SceneManager.LoadScene(nextLevel);
+            SceneManager.LoadScene("RewardScene");
         }
     }
 }

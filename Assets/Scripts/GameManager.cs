@@ -18,10 +18,14 @@ public class GameManager : MonoBehaviour
 
     //player data
     public float playerMaxHealth = 100;
+    public float playerCurrentHealth;
     public float playerArmorValue = 1;
     public float playerDamageMultiplier = 1;
     public float playerRofMultiplier = 1;
    public Weapon playerWeapon = null;
+    public string[] levels;
+    public string nextLevel;
+    public float rateOfFire = 1;
 
     public static GameManager manager;
     // Start is called before the first frame update
@@ -46,7 +50,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        levels = new string[] {"Scene1","Scene2", "Scene3", "EndScene"};
     }
 
     // Update is called once per frame
@@ -73,7 +77,7 @@ public class GameManager : MonoBehaviour
         PlayerData data = new PlayerData();
 
         data.health = playerMaxHealth;
-        data.armorValue = playerArmorValue;
+        //data.armorValue = playerArmorValue;
         data.playerDamageMultiplier = playerDamageMultiplier;
         data.playerRofMultiplier = playerRofMultiplier;
         data.points = playerPoints;
@@ -101,7 +105,7 @@ public class GameManager : MonoBehaviour
             file.Close();
 
             playerMaxHealth = data.health;
-            playerArmorValue = data.armorValue;
+            //playerArmorValue = data.armorValue;
             playerRofMultiplier = data.playerRofMultiplier;
             playerDamageMultiplier = data.playerDamageMultiplier;
             playerPoints = data.points;
@@ -117,7 +121,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string scenename)
     {
+        Debug.Log("ladataan scene " + scenename);
         SceneManager.LoadScene(scenename);
+    }
+
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(nextLevel);
     }
 
 

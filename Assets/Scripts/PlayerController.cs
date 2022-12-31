@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour
 
         startingHealth = GameManager.manager.playerMaxHealth;
         controller = gameObject.AddComponent<CharacterController>();
+        rofMultiplier = GameManager.manager.playerRofMultiplier;
+
+
         mainCamera = FindObjectOfType<Camera>();
         EquipWeapon(defaultWeapon);
         currentHealth = startingHealth;
@@ -138,6 +141,7 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         Debug.Log("Pelaaja kuoli");
+        GameManager.manager.LoadScene("StartMenuScene");
     }
 
     private void OnCollisionEnter(Collision collision)
